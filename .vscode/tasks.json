@@ -11,13 +11,17 @@
         "panel": "new"
       },
       "problemMatcher": [],
-      "dependsOn": ["Compile English translations"]
+      "dependsOn": [
+        "Compile English translations"
+      ]
     },
     {
       "label": "Pytest",
       "type": "shell",
       "command": "${command:python.interpreterPath} -m pytest --timeout=10 tests",
-      "dependsOn": ["Install all Test Requirements"],
+      "dependsOn": [
+        "Install all Test Requirements"
+      ],
       "group": {
         "kind": "test",
         "isDefault": true
@@ -74,7 +78,9 @@
       "label": "Pylint",
       "type": "shell",
       "command": "pylint homeassistant",
-      "dependsOn": ["Install all Requirements"],
+      "dependsOn": [
+        "Install all Requirements"
+      ],
       "group": {
         "kind": "test",
         "isDefault": true
@@ -90,7 +96,9 @@
       "detail": "Generate code coverage report for a given integration.",
       "type": "shell",
       "command": "${command:python.interpreterPath} -m pytest ./tests/components/${input:integrationName}/ --cov=homeassistant.components.${input:integrationName} --cov-report term-missing --durations-min=1 --durations=0 --numprocesses=auto",
-      "dependsOn": ["Compile English translations"],
+      "dependsOn": [
+        "Compile English translations"
+      ],
       "group": {
         "kind": "test",
         "isDefault": true
@@ -106,7 +114,9 @@
       "detail": "Update syrupy snapshots for a given integration.",
       "type": "shell",
       "command": "${command:python.interpreterPath} -m pytest ./tests/components/${input:integrationName} --snapshot-update",
-      "dependsOn": ["Compile English translations"],
+      "dependsOn": [
+        "Compile English translations"
+      ],
       "group": {
         "kind": "test",
         "isDefault": true

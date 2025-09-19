@@ -1,0 +1,14 @@
+{
+  "domain": "mattertest",
+  "name": "mattertest",
+  "codeowners": [
+    "@KyranHU"
+  ],
+  "dependencies": [],
+  "config_flow": true,
+  "documentation": "https://www.home-assistant.io/integrations/mattertest",
+  "integration_type": "device",
+  "iot_class": "assumed_state",
+  "requirements": []
+
+}

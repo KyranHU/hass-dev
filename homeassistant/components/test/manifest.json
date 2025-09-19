@@ -1,0 +1,16 @@
+{
+  "domain": "test",
+  "name": "matter-chargpoint2.0",
+  "codeowners": [
+    "@KyranHU"
+  ],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://www.home-assistant.io/integrations/test",
+  "homekit": {},
+  "iot_class": "local_polling",
+  "quality_scale": "bronze",
+  "requirements": [],
+  "ssdp": [],
+  "zeroconf": []
+}
