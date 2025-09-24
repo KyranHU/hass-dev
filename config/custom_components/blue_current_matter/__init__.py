@@ -5,9 +5,9 @@ from __future__ import annotations
 import asyncio
 from contextlib import suppress
 from datetime import datetime
-import pytz
 import random
 from typing import Any
+import zoneinfo
 
 from bluecurrent_api import Client
 from bluecurrent_api.exceptions import (
@@ -18,6 +18,7 @@ from bluecurrent_api.exceptions import (
 )
 import voluptuous as vol
 
+from homeassistant.components.matter.helpers import get_matter
 from homeassistant.config_entries import ConfigEntry, ConfigEntryState
 from homeassistant.const import CONF_API_TOKEN, CONF_DEVICE_ID, Platform
 from homeassistant.core import HomeAssistant, ServiceCall
@@ -75,6 +76,7 @@ async def async_setup_entry(
 
     if config_entry.data.get("ignore", False):
         LOGGER.warning("Ignoring real data, dummy data mode active")
+        await connector.setup_matter_integration()
         config_entry.async_create_background_task(
             hass, connector.run_task(), "blue_current-websocket"
         )
@@ -274,7 +276,7 @@ class Connector:
                 "current_left": 32,
                 PLUG_AND_CHARGE: {VALUE: True},
                 "public_charging": {VALUE: False},
-                "start_datetime": datetime.now(pytz.timezone("Europe/Amsterdam")),
+                "start_datetime": datetime.now(zoneinfo.ZoneInfo("Europe/Amsterdam")),
                 "stop_datetime": None,
                 "offline_since": None,
                 "smart_charging": {VALUE: True},
@@ -374,3 +376,11 @@ class Connector:
     def connected(self) -> bool:
         """Returns the connection status."""
         return self.client.is_connected() or self.dummy_data
+
+    async def setup_matter_integration(self):
+        """Link Blue Current devices with Matter devices."""
+        matter = get_matter(self.hass)
+        # Find Matter devices that correspond to Blue Current chargers
+        entities = matter.discovered_entities
+        for ent in entities:
+            LOGGER.info("Discovered Matter entity: %s", ent)

@@ -5,9 +5,9 @@
   "config_flow": true,
   "documentation": "https://github.com/bluecurrent/ha-bluecurrent/",
   "iot_class": "cloud_push",
-  "dependencies": ["websocket_api"],
+  "dependencies": ["websocket_api", "matter"],
   "issue_tracker": "https://github.com/bluecurrent/ha-bluecurrent/issues",
-  "requirements": ["bluecurrent-api==1.3.1", "python-matter-server==8.1.0"],
+  "requirements": ["bluecurrent-api==1.3.1"],
   "zeroconf": ["_matter._tcp.local.", "_matterc._udp.local."],
   "version": "1.0.0"
 }

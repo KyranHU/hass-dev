@@ -7,6 +7,11 @@
   "containerEnv": {
     "PYTHONASYNCIODEBUG": "1"
   },
+
+  "mounts": [
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh,type=bind"
+  ],
+
   "features": {
     // Node feature required for Claude Code until fixed https://github.com/anthropics/devcontainer-features/issues/28
     "ghcr.io/devcontainers/features/node:1": {},
@@ -16,11 +21,13 @@
   // Port 5683 udp is used by Shelly integration
   "appPort": ["8123:8123", "5683:5683/udp"],
   "runArgs": [
+    "--network=host",
     "-e",
     "GIT_EDITOR=code --wait",
     "--security-opt",
     "label=disable"
   ],
+
   "customizations": {
     "vscode": {
       "extensions": [
